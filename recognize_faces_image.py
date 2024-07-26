@@ -3,6 +3,8 @@ import face_recognition
 import argparse
 import pickle
 import cv2
+import matplotlib.pyplot as plt
+
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-e", "--encodings", required=True,
@@ -64,9 +66,11 @@ for ((top, right, bottom, left), name) in zip(boxes, names):
 	y = top - 15 if top - 15 > 15 else top + 15
 	cv2.putText(image, name, (left, y), cv2.FONT_HERSHEY_SIMPLEX,
 		0.75, (0, 255, 0), 2)
-# show the output image
-cv2.imshow("Image", image)
-cv2.waitKey(0)
-
+ 
+# Display the image using Matplotlib
+plt.imshow(image)
+plt.title("Image")
+plt.axis('off')  # Hide axes ticks
+plt.show()
 # python recognize_faces_image.py --encodings encodings.pickle \
 # 	--image examples/example_01.png
